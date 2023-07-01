@@ -6,7 +6,18 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<Authors>Mike Chadwick, Jamie Howarth</Authors>
+		<Company>Curate Coders Ltd.</Company>
+		<Description>Helper classes &amp; methods to create image URLs for Umbraco website developers running CloudFlare Pro</Description>
+		<Copyright>2023 Curate Coders Ltd. All rights reserved.</Copyright>
+		<PackageProjectUrl>https://github.com/CurateCoders/CurateCoders.CloudFlarePro</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/CurateCoders/CurateCoders.CloudFlarePro</RepositoryUrl>
+		<RepositoryType>Github</RepositoryType>
+		<PackageTags>C# Umbraco CloudFlare CloudFlarePro responsive images</PackageTags>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Content Include="Views\Shared\Example.cshtml" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Umbraco.Cms.Web.Common" Version="11.4.0" />
