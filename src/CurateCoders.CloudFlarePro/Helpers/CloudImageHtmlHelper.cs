@@ -58,16 +58,21 @@ namespace CurateCoders.CloudFlarePro.Helpers
         /// <summary>
         /// GetImageCdnUrl
         /// </summary>
-        /// <returns></returns>
+        /// <param name="cdnZoneUrl"></param>
+        /// <param name="cloudImage"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns>Cloudflare Image Resizer Service optimised imageUrl</returns>
         public static string GetImageCdnUrl(string cdnZoneUrl, CloudImage cloudImage, int width, int height)
         {
-            //We can remove the media/ hack once we have put the cloud image helper throughout the site
             return cdnZoneUrl + "cdn-cgi/image/" + GetOptionsAsString(cloudImage.Options) + ",width=" + width.ToString() + ",height=" + height.ToString() + ",quality=" + cloudImage.Quality + "/" + cloudImage.ImageUrl.Replace(cdnZoneUrl, String.Empty);
         }
 
         /// <summary>
         /// GetOptionsAsString
         /// </summary>
+        /// <param name="cloudImageOptionsDictionary"></param>
+        /// <returns>ImageOptions as a String</returns>
         private static string GetOptionsAsString(object cloudImageOptionsDictionary)
         {
             string options = String.Empty;

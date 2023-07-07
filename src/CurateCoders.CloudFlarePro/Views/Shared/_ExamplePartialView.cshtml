@@ -1,0 +1,50 @@
+﻿@inherits UmbracoViewPage<CurateCoders.CloudFlarePro.Models.MediaEmbed>
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Web.Common.Views
+@using Umbraco.Extensions;
+@using Umbraco.Cms.Core;
+@using CurateCoders.CloudFlarePro.Helpers
+@using CurateCoders.CloudFlarePro.Models
+@using Microsoft.AspNetCore.Html
+@using static Umbraco.Cms.Core.PropertyEditors.ValueConverters.ImageCropperValue
+
+@if (Model.UmbracoImage != null)
+{
+    //Get Image Size, Gravity, Focalpoint
+    var imageSrc = Model.UmbracoImage.MediaUrl();
+    var imageAlt = Model.UmbracoImage.Name;
+
+    //Set Default Umbraco Image Focal Point (Center)
+    string gravity = "0.5x0.5";
+
+    //Convert Umbraco Image Focal Point to Cloudflare FocalPoint (gravity)
+    MediaWithCrops mediaWithCrops = Model.UmbracoImage as MediaWithCrops;
+    if (mediaWithCrops != null)
+    {
+        if (mediaWithCrops.Content.ContentType.Alias == "Image")
+        {
+            var image = mediaWithCrops.Content as Image;
+
+            if (image.UmbracoFile.HasFocalPoint())
+            {
+                ImageCropperFocalPoint imageFocalPoint = (mediaWithCrops.Content as Image).UmbracoFile.FocalPoint;
+                gravity = string.Format("{0:N2}", imageFocalPoint.Left) + "x" + string.Format("{0:N2}", imageFocalPoint.Top);
+            }
+        }
+    }
+    if (Model.Options == null)
+    {
+        if (!gravity.Equals("0.5x0.5"))
+        {
+            Model.Options = new { format = "auto", fit = "crop", gravity = gravity };
+        }
+        else
+        {
+            Model.Options = new { format = "auto", fit = "scale-down" };
+        }
+    }
+
+    @Html.Raw(Html.GetCloudImageTag("https://cdn.example-cdn-root.com/", new CloudImage(imageSrc, imageAlt, Model.Width, Model.Height, Model.Quality, Model.LazyLoad, Model.Options, Model.Sizes, Model.MediaQueries)))
+}
