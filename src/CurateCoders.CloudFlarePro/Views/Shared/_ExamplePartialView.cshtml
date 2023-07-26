@@ -25,11 +25,9 @@
     {
         if (mediaWithCrops.Content.ContentType.Alias == "Image")
         {
-            var image = mediaWithCrops.Content as Image;
-
-            if (image.UmbracoFile.HasFocalPoint())
+	        if (mediaWithCrops.LocalCrops.HasFocalPoint())
             {
-                ImageCropperFocalPoint imageFocalPoint = (mediaWithCrops.Content as Image).UmbracoFile.FocalPoint;
+                ImageCropperFocalPoint imageFocalPoint = mediaWithCrops.LocalCrops.FocalPoint;
                 gravity = string.Format("{0:N2}", imageFocalPoint.Left) + "x" + string.Format("{0:N2}", imageFocalPoint.Top);
             }
         }
