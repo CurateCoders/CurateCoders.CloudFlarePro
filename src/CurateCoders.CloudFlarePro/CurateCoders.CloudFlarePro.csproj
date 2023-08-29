@@ -3,20 +3,22 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<Authors>Mike Chadwick, Jamie Howarth</Authors>
+		<Authors>Mike Chadwick, jamiehowarth0</Authors>
 		<Company>Curate Coders Ltd.</Company>
-		<Description>Helper classes &amp; methods to create image URLs for Umbraco website developers running CloudFlare Pro</Description>
+		<Description>Helper classes &amp; methods to create responsive image URLs for Umbraco website developers running CloudFlare Pro</Description>
 		<Copyright>2023 Curate Coders Ltd. All rights reserved.</Copyright>
 		<PackageProjectUrl>https://github.com/CurateCoders/CurateCoders.CloudFlarePro</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/CurateCoders/CurateCoders.CloudFlarePro</RepositoryUrl>
 		<RepositoryType>Github</RepositoryType>
 		<PackageTags>C# Umbraco CloudFlare CloudFlarePro responsive images</PackageTags>
+		<Version>0.1.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Content Include="Views\Shared\_ExamplePartialView.cshtml" />
+	  <Content Include="Views\_ExampleView.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
