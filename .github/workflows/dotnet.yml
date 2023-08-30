@@ -35,4 +35,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish package
-      run: dotnet nuget push src\bin\${{ env.projectConfiguration }}\${{ env.projectName }}.${{ steps.version.outputs.substring }}.nupkg -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push -k ${{ secrets.NUGET_API_KEY }}
