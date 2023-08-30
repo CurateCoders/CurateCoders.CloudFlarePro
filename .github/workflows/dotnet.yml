@@ -31,7 +31,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore -p:Configuration=${{ env.projectConfiguration }}
+      run: dotnet build --no-restore -c ${{ env.projectConfiguration }} -o ./
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish package
