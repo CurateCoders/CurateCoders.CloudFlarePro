@@ -9,7 +9,7 @@ env:
 
 on:
   push:
-    branches: [ "main", "tags/*" ]
+    branches: [ "releases/*" ]
 
 jobs:
   build:
@@ -29,4 +29,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish package
-      run: dotnet nuget push src\bin\${{ env.projectConfiguration }}\${{ env.projectName }}${{ GITHUB_REF }}.nupkg -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push src\bin\${{ env.projectConfiguration }}\${{ env.projectName }}${{ github.ref_name }}.nupkg -k ${{ secrets.NUGET_API_KEY }}
