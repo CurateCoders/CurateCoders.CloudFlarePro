@@ -5,12 +5,11 @@ name: .NET
 
 env:
   projectName: CurateCoders.CloudFlarePro
+  projectConfiguration: Release
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "develop", "main" ]
+    branches: [ "tags/*" ]
 
 jobs:
   build:
@@ -26,8 +25,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore -p:Configuration=${{ env.projectConfiguration }}
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish package
-      run: dotnet nuget push src\bin\Debug\${{ env.projectName }}.nupkg -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push src\bin\${{ env.projectConfiguration }}\${{ env.projectName }}${{ GITHUB_REF }}.nupkg -k ${{ secrets.NUGET_API_KEY }}
