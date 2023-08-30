@@ -1,5 +1,4 @@
 ﻿using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Cms.Core.Models;
 
 namespace CurateCoders.CloudFlarePro.Models
 {
