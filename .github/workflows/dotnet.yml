@@ -20,14 +20,14 @@ jobs:
     - uses: bhowell2/github-substring-action@1.0.2
       id: version
       with:
-        value: ${{ github.ref_name}}
+        value: ${{ github.ref_name }}
         index_of_str: "release/"
     - uses: actions/checkout@v3
       id: build
     - name: Setup .NET
       uses: actions/setup-dotnet@v3 
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 7.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
