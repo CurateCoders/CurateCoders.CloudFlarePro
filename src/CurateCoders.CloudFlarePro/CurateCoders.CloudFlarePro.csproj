@@ -21,6 +21,7 @@
 	<ItemGroup>
 	  <Content Include="Views\Shared\_ExamplePartialView.cshtml" />
 	  <Content Include="Views\_ExampleView.cshtml" />
+	  <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 
 	<ItemGroup>
