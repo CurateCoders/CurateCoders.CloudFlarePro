@@ -16,12 +16,12 @@
 		<PackageTags>C# Umbraco Razor CloudFlare CloudFlarePro responsive images</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Version>0.2.3</Version>
+		<Version>0.2.5.1</Version>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Content Include="Views\Shared\_ExamplePartialView.cshtml" />
 	  <Content Include="Views\_ExampleView.cshtml" />
-	  <Content Include="..\..\README.md" Pack="true" PackagePath="\"/>
+	  <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 
 	<ItemGroup>
