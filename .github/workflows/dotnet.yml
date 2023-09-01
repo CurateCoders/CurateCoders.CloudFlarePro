@@ -20,7 +20,7 @@ jobs:
     - uses: bhowell2/github-substring-action@1.0.2
       id: version
       with:
-        value: ${{ github.ref_name}}
+        value: ${{ github.ref_name }}
         index_of_str: "release/"
     - uses: actions/checkout@v3
       id: build
