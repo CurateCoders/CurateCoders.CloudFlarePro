@@ -14,7 +14,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-2022
 
     steps:
     - uses: bhowell2/github-substring-action@1.0.2
@@ -32,11 +32,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: | 
-        dotnet build --no-restore \
-          -c ${{ env.projectConfiguration }} \
-          -p:Version=${{ steps.version.outputs.substring }} \
-          -v d \
-          -o ./
+        dotnet build --no-restore -c ${{ env.projectConfiguration }} -p:Version=${{ steps.version.outputs.substring }}
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish package
