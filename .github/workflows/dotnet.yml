@@ -32,10 +32,10 @@ jobs:
       run: dotnet restore
     - name: Build
       run: | 
-              dotnet build --no-restore \
-                -c ${{ env.projectConfiguration }} \
-                -p:Version=${{ steps.version.outputs.substring }} \
-                -o ./
+        dotnet build --no-restore \
+          -c ${{ env.projectConfiguration }} \
+          -p:Version=${{ steps.version.outputs.substring }} \
+          -o ./
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish package

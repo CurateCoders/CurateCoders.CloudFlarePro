@@ -6,7 +6,7 @@
 }
 
 @*Cached Partial here*@
-@await Html.CachedPartialAsync("Shared/_ExamplePartialView", new MediaEmbed(Model.Content.MediaProvider, Model.Content.MediaValue, Model.Content.MediaImage, null, 600, 400, 75, true, null, "(max-width: 800px) 100vw, 50vw", new List<CloudImageMediaQuery>() {
+@await Html.CachedPartialAsync("Shared/_ExamplePartialView", new MediaEmbed(Model.Content.MediaImage, 600, 400, 75, true, null, "(max-width: 800px) 100vw, 50vw", new List<CloudImageMediaQuery>() {
     new CloudImageMediaQuery() { Key = "400w", Width = "400", Height = "400" },
     new CloudImageMediaQuery() { Key = "600w", Width = "600", Height = "600" },
     new CloudImageMediaQuery() { Key = "900w", Width = "900", Height = "900" },

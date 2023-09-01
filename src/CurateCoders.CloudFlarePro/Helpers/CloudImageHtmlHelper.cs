@@ -51,7 +51,7 @@ namespace CurateCoders.CloudFlarePro.Helpers
                 img.WriteTo(writer, System.Text.Encodings.Web.HtmlEncoder.Default);
                 result = writer.ToString();
 
-                return new HtmlString(result.ToString());
+                return new HtmlString(result);
             }
         }
 
@@ -65,7 +65,7 @@ namespace CurateCoders.CloudFlarePro.Helpers
         /// <returns>Cloudflare Image Resizer Service optimised imageUrl</returns>
         public static string GetImageCdnUrl(string cdnZoneUrl, CloudImage cloudImage, int width, int height)
         {
-            return cdnZoneUrl + "cdn-cgi/image/" + GetOptionsAsString(cloudImage.Options) + ",width=" + width.ToString() + ",height=" + height.ToString() + ",quality=" + cloudImage.Quality + "/" + cloudImage.ImageUrl.Replace(cdnZoneUrl, String.Empty);
+            return $"{cdnZoneUrl}cdn-cgi/image/{GetOptionsAsString(cloudImage.Options)},width={width},height={height},quality={cloudImage.Quality}/{cloudImage.ImageUrl.Replace(cdnZoneUrl, string.Empty)}";
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace CurateCoders.CloudFlarePro.Helpers
         /// <returns>ImageOptions as a String</returns>
         private static string GetOptionsAsString(object cloudImageOptionsDictionary)
         {
-            string options = String.Empty;
+            string options = string.Empty;
             if (cloudImageOptionsDictionary != null)
             {
                 options = new RouteValueDictionary(cloudImageOptionsDictionary).ToQueryString().Replace("&", ",");
@@ -91,7 +91,7 @@ namespace CurateCoders.CloudFlarePro.Helpers
         /// <returns></returns>
         private static string GetMediaQueriesAsString(string cdnZoneUrl, CloudImage cloudImage)
         {
-            StringBuilder srcset = new StringBuilder();
+            var srcset = new StringBuilder();
             foreach (var m in cloudImage.MediaQueries)
             {
                 var imageCdnUrl = GetImageCdnUrl(cdnZoneUrl, cloudImage, Int32.Parse(m.Width), Int32.Parse(m.Height));
