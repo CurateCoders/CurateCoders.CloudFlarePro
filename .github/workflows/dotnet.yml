@@ -32,8 +32,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: | 
-        dotnet build --no-restore -c ${{ env.projectConfiguration }} -p:Version=${{ steps.version.outputs.substring }} -o .\
+        dotnet build --no-restore -c ${{ env.projectConfiguration }} -p:Version=${{ steps.version.outputs.substring }}
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish package
-      run: dotnet nuget push "*.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "bin\${{ env.projectConfiguration }}\*.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
