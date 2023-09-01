@@ -12,7 +12,7 @@
 		<Copyright>2023 Curate Coders Ltd. All rights reserved.</Copyright>
 		<PackageProjectUrl>https://github.com/CurateCoders/CurateCoders.CloudFlarePro</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/CurateCoders/CurateCoders.CloudFlarePro</RepositoryUrl>
-		<RepositoryType>Github</RepositoryType>
+		<RepositoryType>git</RepositoryType>
 		<PackageTags>C# Umbraco Razor CloudFlare CloudFlarePro responsive images</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
