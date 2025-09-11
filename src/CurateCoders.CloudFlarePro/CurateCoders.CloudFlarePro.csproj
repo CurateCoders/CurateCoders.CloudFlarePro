@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -21,10 +21,10 @@
 	<ItemGroup>
 	  <Content Include="Views\Shared\_ExamplePartialView.cshtml" />
 	  <Content Include="Views\_ExampleView.cshtml" />
-	  <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+	  <None Include="..\..\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Umbraco.Cms.Web.Common" Version="11.4.0" />
+		<PackageReference Include="Umbraco.Cms.Web.Common" Version="13.9.2" />
 	</ItemGroup>
 </Project>
