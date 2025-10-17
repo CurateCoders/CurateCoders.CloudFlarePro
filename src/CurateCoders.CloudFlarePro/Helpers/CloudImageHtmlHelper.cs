@@ -44,6 +44,7 @@ namespace CurateCoders.CloudFlarePro.Helpers
             img.MergeAttribute("width", cloudImage.Width.ToString());
             img.MergeAttribute("height", cloudImage.Height.ToString());
             img.MergeAttribute("alt", cloudImage.Alt);
+            if (!cloudImage.LazyLoad) img.MergeAttribute("fetchpriority", "high");
 
             string result;
             using (var writer = new StringWriter())
