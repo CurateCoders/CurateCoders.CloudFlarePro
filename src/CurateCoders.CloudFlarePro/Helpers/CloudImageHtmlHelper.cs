@@ -40,6 +40,11 @@ namespace CurateCoders.CloudFlarePro.Helpers
                 img.MergeAttribute("sizes", cloudImage.Sizes);
             }
 
+            if (!string.IsNullOrEmpty(cloudImage.CssClasses))
+            {
+                img.MergeAttribute("class", cloudImage.CssClasses);
+            }
+
             img.MergeAttribute("src", GetImageCdnUrl(cdnZoneUrl, cloudImage, cloudImage.Width, cloudImage.Height));
             img.MergeAttribute("width", cloudImage.Width.ToString());
             img.MergeAttribute("height", cloudImage.Height.ToString());

@@ -55,14 +55,18 @@ namespace CurateCoders.CloudFlarePro.Models
 		/// </summary>
 		public string? Sizes { get; set; }
 
-		/// <summary>
-		/// Media Query point and image sizes
+        /// <summary>
+        /// Media Query point and image sizes
+        /// </summary>
+        public List<CloudImageMediaQuery> MediaQueries { get; set; }
+
+        /// <summary>
+		/// List of Css Classes
 		/// </summary>
-		public List<CloudImageMediaQuery> MediaQueries { get; set; }
+		public string? CssClasses { get; set; }
 
-
-		/// <summary>
-        /// Constructor
+        /// <summary>
+        /// Constructor with MediaProvider and CssClasses
         /// </summary>
         /// <param name="mediaProvider"></param>
         /// <param name="mediaValue"></param>
@@ -72,9 +76,11 @@ namespace CurateCoders.CloudFlarePro.Models
         /// <param name="height"></param>
         /// <param name="quality"></param>
         /// <param name="lazyLoad"></param>
-        /// <param name="Options"></param>
+        /// <param name="options"></param>
+        /// <param name="sizes"></param> 
         /// <param name="mediaQueries"></param>
-        public MediaEmbed(string mediaProvider, string mediaValue, IPublishedContent umbracoImage, string imageOrientation, int width, int height, int quality, bool lazyLoad, object Options, string? sizes, List<CloudImageMediaQuery> mediaQueries)
+        /// <param name="cssClasses"></param>
+        public MediaEmbed(string mediaProvider, string mediaValue, IPublishedContent umbracoImage, string imageOrientation, int width, int height, int quality, bool lazyLoad, object options, string? sizes, List<CloudImageMediaQuery> mediaQueries, string? cssClasses)
         {
             this.MediaProvider = mediaProvider;
             this.MediaValue = mediaValue;
@@ -84,13 +90,14 @@ namespace CurateCoders.CloudFlarePro.Models
             this.Height = height;
             this.Quality = quality;
             this.LazyLoad = lazyLoad;
-            this.Options = Options;
-            this.MediaQueries = mediaQueries;
+            this.Options = options;
             this.Sizes = sizes;
+            this.MediaQueries = mediaQueries;
+            this.CssClasses = cssClasses;
         }
 
         /// <summary>
-        /// Constructor
+        /// Constructor with MediaProvider
         /// </summary>
         /// <param name="mediaProvider"></param>
         /// <param name="mediaValue"></param>
@@ -100,7 +107,59 @@ namespace CurateCoders.CloudFlarePro.Models
         /// <param name="height"></param>
         /// <param name="quality"></param>
         /// <param name="lazyLoad"></param>
-        /// <param name="Options"></param>
+        /// <param name="options"></param>
+        /// <param name="sizes"></param> 
+        /// <param name="mediaQueries"></param>
+        public MediaEmbed(string mediaProvider, string mediaValue, IPublishedContent umbracoImage, string imageOrientation, int width, int height, int quality, bool lazyLoad, object options, string? sizes, List<CloudImageMediaQuery> mediaQueries)
+        {
+            this.MediaProvider = mediaProvider;
+            this.MediaValue = mediaValue;
+            this.UmbracoImage = umbracoImage;
+            this.ImageOrientation = imageOrientation;
+            this.Width = width;
+            this.Height = height;
+            this.Quality = quality;
+            this.LazyLoad = lazyLoad;
+            this.Options = options;
+            this.Sizes = sizes;
+            this.MediaQueries = mediaQueries;
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="umbracoImage"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="quality"></param>
+        /// <param name="lazyLoad"></param>
+        /// <param name="options"></param>
+        /// <param name="sizes"></param> 
+        /// <param name="mediaQueries"></param>
+        /// <param name="cssClasses"></param>
+        public MediaEmbed(IPublishedContent umbracoImage, int width, int height, int quality, bool lazyLoad, object options, string? sizes, List<CloudImageMediaQuery> mediaQueries, string? cssClasses)
+        {
+            this.UmbracoImage = umbracoImage;
+            this.Width = width;
+            this.Height = height;
+            this.Quality = quality;
+            this.LazyLoad = lazyLoad;
+            this.Options = options;
+            this.Sizes = sizes;
+            this.MediaQueries = mediaQueries;
+            this.CssClasses = cssClasses;
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="umbracoImage"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="quality"></param>
+        /// <param name="lazyLoad"></param>
+        /// <param name="options"></param>
+        /// <param name="sizes"></param> 
         /// <param name="mediaQueries"></param>
         public MediaEmbed(IPublishedContent umbracoImage, int width, int height, int quality, bool lazyLoad, object options, string? sizes, List<CloudImageMediaQuery> mediaQueries)
         {
@@ -110,8 +169,8 @@ namespace CurateCoders.CloudFlarePro.Models
             this.Quality = quality;
             this.LazyLoad = lazyLoad;
             this.Options = options;
-            this.MediaQueries = mediaQueries;
             this.Sizes = sizes;
+            this.MediaQueries = mediaQueries;
         }
     }
 }

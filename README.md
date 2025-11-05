@@ -26,6 +26,7 @@ The main parameter passed to the partial is an instance of the ```MediaEmbed``` 
 - ```options``` - Cloudflare Pro-specific options as a a POCO which then gets converted into additional querystring entries upon rendering;
 - ```sizes``` - A CSS rule to dictate at which sizes Cloudflare Pro Image Resizing should be invoked - see [here](https://developers.cloudflare.com/images/image-resizing/responsive-images/#the-sizes-attribute) for full documentation on the feature;
 - ```mediaQueries``` - a list of ```CloudImageMediaQuery``` objects, which specify at which screen size breakpoints/viewport widths you want Cloudflare Image Resizing to generate URLs for.
+- ```cssClasses``` - a nullable list of ```Css Classes``` space separated list of css classes, these will be specific to your project but will be useful for any styling tweaks if required.
 
 ### Examples
 
