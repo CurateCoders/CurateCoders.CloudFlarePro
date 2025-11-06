@@ -47,15 +47,44 @@
 		/// </summary>
 		public List<CloudImageMediaQuery> MediaQueries { get; set; }
 
-		/// <summary>
+        /// <summary>
+        /// List of Css Classes
+        /// </summary>
+        public string? CssClasses { get; set; }
+
+        /// <summary>
         /// Overloaded Basic Constructor
         /// </summary>
-        /// <param name="mediaImage"></param>
+        /// <param name="imageUrl"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="quality"></param>
         /// <param name="lazyLoad"></param>
-        /// <param name="mediaQueryImages"></param>
+        /// <param name="mediaQueries"></param>
+        /// <param name="cssClasses"></param>
+        public CloudImage(string imageUrl, string alt, int width, int height, int quality, bool lazyLoad, object options, string? sizes, List<CloudImageMediaQuery> mediaQueries, string? cssClasses)
+        {
+            this.ImageUrl = imageUrl;
+            this.Alt = alt;
+            this.Width = width;
+            this.Height = height;
+            this.Quality = quality;
+            this.LazyLoad = lazyLoad;
+            this.Options = options;
+            this.Sizes = sizes;
+            this.MediaQueries = mediaQueries;
+            this.CssClasses = cssClasses;
+        }
+
+        /// <summary>
+        /// Overloaded Basic Constructor
+        /// </summary>
+        /// <param name="imageUrl"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="quality"></param>
+        /// <param name="lazyLoad"></param>
+        /// <param name="mediaQueries"></param>
         public CloudImage(string imageUrl, string alt, int width, int height, int quality, bool lazyLoad, object options, string? sizes, List<CloudImageMediaQuery> mediaQueries)
         {
             this.ImageUrl = imageUrl;
@@ -65,8 +94,8 @@
             this.Quality = quality;
             this.LazyLoad = lazyLoad;
             this.Options = options;
-            this.MediaQueries = mediaQueries;
             this.Sizes = sizes;
+            this.MediaQueries = mediaQueries;
         }
     }
 }
