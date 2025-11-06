@@ -4,11 +4,84 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text;
 using Umbraco.Extensions;
 using CurateCoders.CloudFlarePro.Models;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace CurateCoders.CloudFlarePro.Helpers
 {
     public static class CloudImageHtmlHelper
     {
+        /// <summary>
+        /// Get the CloudFlare Image Tag in HTML
+        /// </summary>
+        /// <param name="htmlHelper"></param>
+        /// <param name="cdnZoneUrl"></param>
+        /// <param name="imageSrc"></param>
+        /// <param name="imageAlt"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="quality"></param>
+        /// <param name="lazyLoad"></param>
+        /// <param name="options"></param>
+        /// <param name="sizes"></param>
+        /// <param name="mediaQueries"></param>
+        /// <param name="cssClasses"></param>
+        /// <returns></returns>
+        public static IHtmlContent GetCloudflareImageTag(this IHtmlHelper htmlHelper, string cdnZoneUrl, string imageSrc, string imageAlt,
+            int width, int height, int quality, bool lazyLoad, object options, string? sizes, string mediaQueries, string cssClasses)
+        {
+            var optionsAsString = GetOptionsAsString(options);
+
+            var img = new TagBuilder("img")
+            {
+                TagRenderMode = TagRenderMode.SelfClosing
+            };
+
+            
+            //create the mediaQueriesFromString
+            var cloudImageMediaQueryList = new List<CloudImageMediaQuery>();
+            var cloudImageMediaQueriesList = mediaQueries.Split(',');
+
+            foreach (var query in cloudImageMediaQueriesList)
+            {
+                var parts = query.Split(':');
+                cloudImageMediaQueryList.Add(new CloudImageMediaQuery() { Key = parts[0].ToString()+"w", Width = parts[1].ToString(), Height = parts[2].ToString() });
+            }
+
+            var cloudImage = new CloudImage(imageSrc, imageAlt, width, height, quality, lazyLoad, options, sizes, cloudImageMediaQueryList, cssClasses);
+
+            img.MergeAttribute("srcset", GetMediaQueriesAsString(cdnZoneUrl, cloudImage));
+
+            if (lazyLoad)
+            {
+                img.MergeAttribute("loading", "lazy");
+            }
+
+            if (!string.IsNullOrEmpty(sizes))
+            {
+                img.MergeAttribute("sizes", sizes);
+            }
+
+            if (!string.IsNullOrEmpty(cssClasses))
+            {
+                img.MergeAttribute("class", cssClasses);
+            }
+
+            img.MergeAttribute("src", GetImageCdnUrl(cdnZoneUrl, cloudImage, width, height));
+            img.MergeAttribute("width", cloudImage.Width.ToString());
+            img.MergeAttribute("height", cloudImage.Height.ToString());
+            img.MergeAttribute("alt", cloudImage.Alt);
+            if (!cloudImage.LazyLoad) img.MergeAttribute("fetchpriority", "high");
+
+            string result;
+            using (var writer = new StringWriter())
+            {
+                img.WriteTo(writer, System.Text.Encodings.Web.HtmlEncoder.Default);
+                result = writer.ToString();
+
+                return new HtmlString(result);
+            }
+        }
+
         /// <summary>
         /// Get the CloudFlare Image Tag in HTML
         /// </summary>
