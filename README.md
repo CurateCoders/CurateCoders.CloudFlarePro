@@ -17,9 +17,7 @@ To get started, install the package via Nuget:
 
 	``` dotnet add package CurateCoders.CloudFlarePro ```
 
-- Please note
-
-- We have updated the package to introduce a far simpler way of using the package, see example 2 below but both approaches will continue to work.
+- Please note! We have updated the package to introduce a far simpler way of using the package, see example 2 below but both approaches will continue to work for backwards compatibility.
 
 ### Example 1 (Object Oriented Approach)
 
