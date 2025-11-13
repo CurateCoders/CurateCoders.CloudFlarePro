@@ -8,16 +8,16 @@ namespace CurateCoders.CloudFlarePro.Models
 {
     public class CloudflareImageOptions
     {
-        public string CdnZoneUrl { get; set; }
-        public string Src { get; set; }
-        public string Alt { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Quality { get; set; }
-        public bool LazyLoad{ get; set; }
+        public string? CdnZoneUrl { get; set; }
+        public string? Src { get; set; }
+        public string? Alt { get; set; }
+        public string? Width { get; set; }
+        public string? Height { get; set; }
+        public string? Quality { get; set; }
+        public bool LazyLoad { get; set; }
         public string? Options { get; set; }
         public string? Sizes { get; set; }
-        public string SrcSetSpec { get; set; }
+        public string? SrcSetSpec { get; set; }
         public string? CssClasses { get; set; }
     }
 }

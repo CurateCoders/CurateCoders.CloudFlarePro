@@ -18,27 +18,14 @@ namespace CurateCoders.CloudFlarePro.Helpers
         /// <returns>Html Image Tag</returns>
         public static IHtmlContent GetCloudflareImageTag(this IHtmlHelper htmlHelper, CloudflareImageOptions options)
         {
-            var optionsAsString = GetOptionsAsString(options.Options);
-
             var img = new TagBuilder("img")
             {
                 TagRenderMode = TagRenderMode.SelfClosing
             };
 
-            
-            //create the mediaQueriesFromString
-            var cloudImageMediaQueryList = new List<CloudImageMediaQuery>();
-            var cloudImageMediaQueriesList = options.SrcSetSpec.Split(',');
+            var cloudflareImage = new CloudflareImage(options.Src, options.Alt, options.Width, options.Height, options.Quality, options.LazyLoad, options.Options, options.Sizes, options.SrcSetSpec, options.CssClasses);
 
-            foreach (var query in cloudImageMediaQueriesList)
-            {
-                var parts = query.Split(':');
-                cloudImageMediaQueryList.Add(new CloudImageMediaQuery() { Key = parts[0].ToString()+"w", Width = parts[1].ToString(), Height = parts[2].ToString() });
-            }
-
-            var cloudImage = new CloudImage(options.Src, options.Alt, options.Width, options.Height, options.Quality, options.LazyLoad, optionsAsString, options.Sizes, cloudImageMediaQueryList, options.CssClasses);
-
-            img.MergeAttribute("srcset", GetMediaQueriesAsString(options.CdnZoneUrl, cloudImage));
+            img.MergeAttribute("srcset", GetMediaQueriesAsString(options.CdnZoneUrl, cloudflareImage));
 
             if (options.LazyLoad)
             {
@@ -55,11 +42,12 @@ namespace CurateCoders.CloudFlarePro.Helpers
                 img.MergeAttribute("class", options.CssClasses);
             }
 
-            img.MergeAttribute("src", GetImageCdnUrl(options.CdnZoneUrl, cloudImage, options.Width, options.Height));
-            img.MergeAttribute("width", cloudImage.Width.ToString());
-            img.MergeAttribute("height", cloudImage.Height.ToString());
-            img.MergeAttribute("alt", cloudImage.Alt);
-            if (!cloudImage.LazyLoad) img.MergeAttribute("fetchpriority", "high");
+            img.MergeAttribute("src", GetCloudflareImageCdnUrl(options.CdnZoneUrl, cloudflareImage, options.Width, options.Height));
+            img.MergeAttribute("width", cloudflareImage.Width);
+            img.MergeAttribute("height", cloudflareImage.Height);
+            img.MergeAttribute("alt", cloudflareImage.Alt);
+
+            if (!cloudflareImage.LazyLoad) img.MergeAttribute("fetchpriority", "high");
 
             string result;
             using (var writer = new StringWriter())
@@ -70,6 +58,47 @@ namespace CurateCoders.CloudFlarePro.Helpers
                 return new HtmlString(result);
             }
         }
+
+        /// <summary>
+        /// GetMediaQueriesAsString
+        /// </summary>
+        /// <param name="cdnZoneUrl"></param>
+        /// <param name="cloudImage"></param>
+        /// <returns></returns>
+        private static string GetMediaQueriesAsString(string? cdnZoneUrl, CloudflareImage cloudflareImage)
+        {
+            var srcset = new StringBuilder();
+            if (cloudflareImage.SrcSetSpec != null)
+            {
+                foreach (var query in cloudflareImage.SrcSetSpec.Split(','))
+                {
+                    var parts = query.Split(':');
+                    //Key = parts[0].ToString()+"w", Width = parts[1].ToString(), Height = parts[2].ToString()
+                    var imageCdnUrl = GetCloudflareImageCdnUrl(cdnZoneUrl, cloudflareImage, parts[1], parts[2]);
+                    srcset.AppendLine(imageCdnUrl + "  " + parts[0] + ",");
+                }
+            }
+            return srcset.ToString();
+        }
+
+        /// <summary>
+        /// GetImageCdnUrl
+        /// </summary>
+        /// <param name="cdnZoneUrl"></param>
+        /// <param name="cloudflareImage"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns>Cloudflare Image Resizer Service optimised imageUrl</returns>
+        public static string GetCloudflareImageCdnUrl(string? cdnZoneUrl, CloudflareImage cloudflareImage, string? width, string? height)
+        {
+            if(!string.IsNullOrEmpty(cloudflareImage.Options))
+                return $"{cdnZoneUrl}cdn-cgi/image/{cloudflareImage.Options},width={width},height={height},quality={cloudflareImage.Quality}/{cloudflareImage.Src.Replace(cdnZoneUrl, string.Empty)}";
+            else
+                return $"{cdnZoneUrl}cdn-cgi/image/width={width},height={height},quality={cloudflareImage.Quality}/{cloudflareImage.Src.Replace(cdnZoneUrl, string.Empty)}";
+        }
+
+
+        #region Original Object Based - To be Depreceated
 
         /// <summary>
         /// Get the CloudFlare Image Tag in HTML
@@ -151,6 +180,7 @@ namespace CurateCoders.CloudFlarePro.Helpers
             return options;
         }
 
+
         /// <summary>
         /// GetMediaQueriesAsString
         /// </summary>
@@ -167,5 +197,7 @@ namespace CurateCoders.CloudFlarePro.Helpers
             }
             return srcset.ToString();
         }
+
+        #endregion
     }
 }
