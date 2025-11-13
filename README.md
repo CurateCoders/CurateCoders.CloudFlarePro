@@ -1,6 +1,8 @@
 ﻿# Curate Coders' Cloudflare Pro helper package
 
 ![Nuget](https://img.shields.io/nuget/dt/CurateCoders.CloudflarePro)
+![Website](https://builtforyou.digital)
+![Info](mailto:hello@builtforyou.digital)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/CurateCoders/CurateCoders.CloudflarePro/dotnet.yml)
 
 This package provides helper classes & views to leverage Cloudflare Pro's Image Resizing service for providing responsive images using Umbraco's media cropping facilities.
@@ -14,6 +16,10 @@ To get started, install the package via Nuget:
 - dotnet CLI
 
 	``` dotnet add package CurateCoders.CloudFlarePro ```
+
+- Please note
+
+- We have updated the package to introduce a far simpler way of using the package, see example 2 below but both approaches will continue to work.
 
 ### Example 1 (Object Oriented Approach)
 
@@ -35,7 +41,7 @@ In progress, in the meantime please check ```Views\_ExampleView.cshtml``` for so
 If using the sample code as-is, **please** change the URL on line 47 of ```Views\Shared\_ExamplePartialView.cshtml``` to be the URL of your Cloudflare account!
 
 
-### Example 2 (New simple declarative approach)
+### Example 2 (New simple declarative approach) - Updated 11/2025
 
 Once you have installed the package, you'll find an example Razor view in ```_ExampleViewNew.cshtml```.
 
