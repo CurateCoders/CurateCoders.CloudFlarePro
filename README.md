@@ -1,8 +1,6 @@
 ﻿# Curate Coders' Cloudflare Pro helper package
 
 ![Nuget](https://img.shields.io/nuget/dt/CurateCoders.CloudflarePro)
-![Website](https://builtforyou.digital)
-![Info](mailto:hello@builtforyou.digital)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/CurateCoders/CurateCoders.CloudflarePro/dotnet.yml)
 
 This package provides helper classes & views to leverage Cloudflare Pro's Image Resizing service for providing responsive images using Umbraco's media cropping facilities.
