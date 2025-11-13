@@ -14,22 +14,11 @@ namespace CurateCoders.CloudFlarePro.Helpers
         /// Get the CloudFlare Image Tag in HTML
         /// </summary>
         /// <param name="htmlHelper"></param>
-        /// <param name="cdnZoneUrl"></param>
-        /// <param name="imageSrc"></param>
-        /// <param name="imageAlt"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="quality"></param>
-        /// <param name="lazyLoad"></param>
         /// <param name="options"></param>
-        /// <param name="sizes"></param>
-        /// <param name="mediaQueries"></param>
-        /// <param name="cssClasses"></param>
-        /// <returns></returns>
-        public static IHtmlContent GetCloudflareImageTag(this IHtmlHelper htmlHelper, string cdnZoneUrl, string imageSrc, string imageAlt,
-            int width, int height, int quality, bool lazyLoad, object options, string? sizes, string mediaQueries, string cssClasses)
+        /// <returns>Html Image Tag</returns>
+        public static IHtmlContent GetCloudflareImageTag(this IHtmlHelper htmlHelper, CloudflareImageOptions options)
         {
-            var optionsAsString = GetOptionsAsString(options);
+            var optionsAsString = GetOptionsAsString(options.Options);
 
             var img = new TagBuilder("img")
             {
@@ -39,7 +28,7 @@ namespace CurateCoders.CloudFlarePro.Helpers
             
             //create the mediaQueriesFromString
             var cloudImageMediaQueryList = new List<CloudImageMediaQuery>();
-            var cloudImageMediaQueriesList = mediaQueries.Split(',');
+            var cloudImageMediaQueriesList = options.SrcSetSpec.Split(',');
 
             foreach (var query in cloudImageMediaQueriesList)
             {
@@ -47,26 +36,26 @@ namespace CurateCoders.CloudFlarePro.Helpers
                 cloudImageMediaQueryList.Add(new CloudImageMediaQuery() { Key = parts[0].ToString()+"w", Width = parts[1].ToString(), Height = parts[2].ToString() });
             }
 
-            var cloudImage = new CloudImage(imageSrc, imageAlt, width, height, quality, lazyLoad, options, sizes, cloudImageMediaQueryList, cssClasses);
+            var cloudImage = new CloudImage(options.Src, options.Alt, options.Width, options.Height, options.Quality, options.LazyLoad, optionsAsString, options.Sizes, cloudImageMediaQueryList, options.CssClasses);
 
-            img.MergeAttribute("srcset", GetMediaQueriesAsString(cdnZoneUrl, cloudImage));
+            img.MergeAttribute("srcset", GetMediaQueriesAsString(options.CdnZoneUrl, cloudImage));
 
-            if (lazyLoad)
+            if (options.LazyLoad)
             {
                 img.MergeAttribute("loading", "lazy");
             }
 
-            if (!string.IsNullOrEmpty(sizes))
+            if (!string.IsNullOrEmpty(options.Sizes))
             {
-                img.MergeAttribute("sizes", sizes);
+                img.MergeAttribute("sizes", options.Sizes);
             }
 
-            if (!string.IsNullOrEmpty(cssClasses))
+            if (!string.IsNullOrEmpty(options.CssClasses))
             {
-                img.MergeAttribute("class", cssClasses);
+                img.MergeAttribute("class", options.CssClasses);
             }
 
-            img.MergeAttribute("src", GetImageCdnUrl(cdnZoneUrl, cloudImage, width, height));
+            img.MergeAttribute("src", GetImageCdnUrl(options.CdnZoneUrl, cloudImage, options.Width, options.Height));
             img.MergeAttribute("width", cloudImage.Width.ToString());
             img.MergeAttribute("height", cloudImage.Height.ToString());
             img.MergeAttribute("alt", cloudImage.Alt);
@@ -88,7 +77,7 @@ namespace CurateCoders.CloudFlarePro.Helpers
         /// <param name="htmlHelper"></param>
         /// <param name="cdnZoneUrl"></param>
         /// <param name="cloudImage"></param>
-        /// <returns></returns>
+        /// <returns>Html Image Tag</returns>
         public static IHtmlContent GetCloudImageTag(this IHtmlHelper htmlHelper, string cdnZoneUrl, CloudImage cloudImage)
         {
             var options = GetOptionsAsString(cloudImage.Options);
