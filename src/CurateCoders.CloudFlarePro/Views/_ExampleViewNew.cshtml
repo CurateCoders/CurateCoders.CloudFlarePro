@@ -1,4 +1,3 @@
-@inherits UmbracoViewPage
 @using CurateCoders.CloudFlarePro.Models
 @using CurateCoders.CloudFlarePro.Helpers
 
@@ -6,10 +5,25 @@
     Layout = "_Layout";
 }
 
-@*Direct Declarative Format using new CloudflareImageOptions
+@*
+    Direct Declarative Format using new CloudflareImageOptions
     This version does not use cached partials, Cloudflare Caches images once generated so isn't actually necessary'
-    List of Options: https://developers.cloudflare.com/images/transform-images/transform-via-url/
-    Options = "format=auto,fit=crop,gravity=0.5x0.5", or null
+    
+    Some examples of how to use the options:
+    CdnZoneUrl = "https://cdn.yourdomain.com/",
+    Src = Model.Image.MediaUrl(),
+    Alt = Model.Image.Name,
+    Width = "1200",
+    Height = "600",
+    Quality = "80",
+    LazyLoad = false
+    Options = "format=auto,fit=crop,gravity=0.5x0.5", or null (we recommend using at least "format=auto")
+    Sizes = "(max-width: 1200px) 100vw, 1200px",
+    SrcSetSpec = "400w:400:400,600w:600:600,900w:900:900,1200w:1200:1200,1900w:1900:1900",
+    CssClasses = "w-full h-full object-cover object-bottom"
+
+    NOTES:
+    Cloudflare Docs: List of Options: https://developers.cloudflare.com/images/transform-images/transform-via-url/
     CssClasses can be anything specific to your project, these are just examples or null
     All parameters can also be null
 *@
@@ -17,8 +31,8 @@
 @Html.Raw(Html.GetCloudflareImageTag(new CloudflareImageOptions
 {
     CdnZoneUrl = "https://cdn.yourdomain.com/",
-    Src = Model.Image.MediaUrl(),
-    Alt = Model.Image.Name,
+    Src = "https://example.com/image.jpg",
+    Alt = "Example Image Alt Description",
     Width = "1200",
     Height = "600",
     Quality = "80",
