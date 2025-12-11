@@ -56,3 +56,10 @@ The new ```CloudflareOptions``` object is passed to the HtmlHelper ```GetCloudfl
 
 Please check ```Views\_ExampleViewNew.cshtml``` for some sample usage.
 Please note you must change line 19 to be the url of your cdn including its sub domain. https://cdn.yourdomain.com/
+
+Make sure you exclude/remove example files in your projects .csproj files:
+<ItemGroup Condition="'$(Configuration)' == 'Release'">  
+	<Content Remove="Views\Shared\_ExamplePartialView.cshtml" />
+	<Content Remove="Views\_ExampleView.cshtml" />
+	<Content Remove="Views\_ExampleViewNew.cshtml" />
+</ItemGroup>

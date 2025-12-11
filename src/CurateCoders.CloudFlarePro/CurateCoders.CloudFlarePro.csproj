@@ -6,17 +6,17 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<Authors>mikechadwick, jamiehowarth0</Authors>
-		<Company>Curate Coders Ltd.</Company>
+		<Authors>Curate Coders Ltd t/a BuiltForYou Digital: Mike Chadwick, Jamie Howarth</Authors>
+		<Company>Curate Coders Ltd</Company>
 		<Description>Helper classes &amp; methods to create responsive image URLs for Umbraco website developers running CloudFlare Pro</Description>
-		<Copyright>2023 Curate Coders Ltd. All rights reserved.</Copyright>
+		<Copyright>2025 Curate Coders Ltd. All rights reserved.</Copyright>
 		<PackageProjectUrl>https://github.com/CurateCoders/CurateCoders.CloudFlarePro</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/CurateCoders/CurateCoders.CloudFlarePro</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>C# Umbraco Razor CloudFlare CloudFlarePro responsive images</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Version>0.2.5.1</Version>
+		<Version>13.12.0.1</Version>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Content Include="Views\Shared\_ExamplePartialView.cshtml" />
@@ -26,6 +26,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Umbraco.Cms.Web.Common" Version="13.11.0" />
+		<PackageReference Include="Umbraco.Cms.Web.Common" Version="13.12.0" />
 	</ItemGroup>
 </Project>
