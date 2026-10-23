@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<UmbracoMajor Condition="'$(UmbracoMajor)' == ''">17</UmbracoMajor>
+		<TargetFramework Condition="$(UmbracoMajor) &lt;= 14">net8.0</TargetFramework>
+		<TargetFramework Condition="$(UmbracoMajor) == 15 Or $(UmbracoMajor) == 16">net9.0</TargetFramework>
+		<TargetFramework Condition="$(UmbracoMajor) &gt;= 17">net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+		<PackageReference Include="xunit" Version="2.9.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\CurateCoders.CloudFlarePro\CurateCoders.CloudFlarePro.csproj" />
+	</ItemGroup>
+</Project>
