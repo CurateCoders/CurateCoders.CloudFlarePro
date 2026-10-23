@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<UmbracoMajor Condition="'$(UmbracoMajor)' == ''">17</UmbracoMajor>
+		<NextUmbracoMajor>$([MSBuild]::Add($(UmbracoMajor), 1))</NextUmbracoMajor>
+		<TargetFramework Condition="$(UmbracoMajor) &lt;= 14">net8.0</TargetFramework>
+		<TargetFramework Condition="$(UmbracoMajor) == 15 Or $(UmbracoMajor) == 16">net9.0</TargetFramework>
+		<TargetFramework Condition="$(UmbracoMajor) &gt;= 17">net10.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -16,7 +20,7 @@
 		<PackageTags>C# Umbraco Razor CloudFlare CloudFlarePro responsive images</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Version>13.13.0</Version>
+		<Version Condition="'$(Version)' == ''">$(UmbracoMajor).0.0</Version>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Content Include="Views\Shared\_ExamplePartialView.cshtml" />
@@ -26,6 +30,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Umbraco.Cms.Web.Common" Version="13.13.0" />
+		<PackageReference Include="Umbraco.Cms.Web.Common" Version="[$(UmbracoMajor).0.0,$(NextUmbracoMajor).0.0)" />
 	</ItemGroup>
 </Project>
