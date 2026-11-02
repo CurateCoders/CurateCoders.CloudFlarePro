@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text;
 using Umbraco.Extensions;
 using CurateCoders.CloudFlarePro.Models;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace CurateCoders.CloudFlarePro.Helpers
 {

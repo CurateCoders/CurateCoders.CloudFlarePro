@@ -15,6 +15,19 @@ To get started, install the package via Nuget:
 
 	``` dotnet add package CurateCoders.CloudFlarePro ```
 
+### Versioning
+
+From v14 onwards we publish one package per Umbraco major version. Package version `X.0.0` supports every Umbraco `X.y.z` release (dependency range `[X.0.0, X+1.0.0)`). Fixes to the package itself increment the patch number (e.g. `17.0.1`).
+
+| Package | Umbraco | Target framework |
+|---------|---------|------------------|
+| 13.x    | 13      | net8.0           |
+| 14.x    | 14      | net8.0           |
+| 15.x    | 15      | net9.0           |
+| 16.x    | 16      | net9.0           |
+| 17.x    | 17      | net10.0          |
+| 18.x    | 18      | net10.0          |
+
 - Please note! We have updated the package to introduce a far simpler way of using the package, see example 2 below but both approaches will continue to work for backwards compatibility.
 
 ### Example 1 (Object Oriented Approach)
