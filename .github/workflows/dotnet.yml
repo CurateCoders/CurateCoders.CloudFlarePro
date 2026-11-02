@@ -43,7 +43,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore -c ${{ env.projectConfiguration }} -p:UmbracoMajor=${{ steps.version.outputs.major }} -p:Version=${{ steps.version.outputs.version }}
     - name: Test
-      run: dotnet test --no-build -c ${{ env.projectConfiguration }} --verbosity normal
+      run: dotnet test --no-build -c ${{ env.projectConfiguration }} -p:UmbracoMajor=${{ steps.version.outputs.major }} -p:Version=${{ steps.version.outputs.version }} --verbosity normal
     - name: NuGet login (OIDC to temporary API key)
       uses: NuGet/login@v1
       id: login
